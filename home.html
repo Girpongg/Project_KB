@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            height: 100%;
+            text-align: center;
+            font-family: 'Oxygen Mono', monospace;
+            color: #999;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            letter-spacing: 1pt;
+            font-size: 30pt;
+            margin-bottom: 15px;
+        }
+
+        p {
+            text-align: left;
+            margin: 0;
+            text-transform: lowercase;
+            font-size: 10pt;
+            font-weight: 900;
+            width: 50%;
+            display: none;
+        }
+
+        #table {
+            display: table;
+            width: 100%;
+            height: 100%;
+            background-color: #e5e5e5;
+            position: relative;
+        }
+
+        #navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px 50px;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #navbar img {
+            height: 50px;
+        }
+
+        #navbar button {
+            background-color: #b8b8b8;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 70px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        #centeralign {
+            display: table-cell;
+            vertical-align: middle;
+            padding-top: 60px;
+        }
+
+        .nama {
+            text-align: center !important;
+        }
+
+        #p2 {
+            margin-top: 0.6cm;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="table">
+        <div id="navbar">
+            <img src="petra.webp" alt="Logo">
+            PETRA CHRISTIAN UNIVERSITY / ARTIFICIAL INTELLIGENCE
+
+            <a href="upload.html">
+                <button>TRY IT !</button></a>
+        </div>
+        <div id="centeralign">
+            <h1>HandWriting Recognition</h1>
+            <p id="p1">Handwriting recognition (HWR), also known as handwritten text recognition (HTR), is the
+                ability of a
+                computer to receive and interpret intelligible handwritten input from sources such as paper documents,
+                photographs, touch-screens and other devices
+            </p>
+            <p class="nama" id="p2">- Amelia Wibisino</p>
+            <p class="nama" id="p3">- Valiant Gilchrist</p>
+            <p class="nama" id="p4">- Girvan Witartha</p>
+            <p class="nama" id="p5">- Laura Wijaya</p>
+            <p class="nama" id="p6">- Tania Jessica</p>
+        </div>
+    </div>
+    <script>
+        function typeEffect(element, speed) {
+            var text = element.innerHTML;
+            element.innerHTML = "";
+
+            var i = 0;
+            var timer = setInterval(function() {
+                if (i < text.length) {
+                    element.append(text.charAt(i));
+                    i++;
+                } else {
+                    clearInterval(timer);
+                }
+            }, speed);
+        }
+
+        var speed = 65;
+        var h1 = document.querySelector('h1');
+        var p1 = document.querySelector('#p1');
+        var p2 = document.querySelector('#p2');
+        var p3 = document.querySelector('#p3');
+        var p4 = document.querySelector('#p4');
+        var p5 = document.querySelector('#p5');
+        var p6 = document.querySelector('#p6');
+        var delay = h1.innerHTML.length * speed + speed;
+
+        typeEffect(h1, speed);
+
+        setTimeout(function() {
+            p1.style.display = "inline-block";
+            typeEffect(p1, speed);
+        }, delay + 500);
+
+        setTimeout(function() {
+            p2.style.display = "inline-block";
+            typeEffect(p2, speed);
+        }, delay + 20000); 
+
+        setTimeout(function() {
+            p3.style.display = "inline-block";
+            typeEffect(p3, speed);
+        }, delay + 22000); 
+
+        setTimeout(function() {
+            p4.style.display = "inline-block";
+            typeEffect(p4, speed);
+        }, delay + 24000); 
+
+        setTimeout(function() {
+            p5.style.display = "inline-block";
+            typeEffect(p5, speed);
+        }, delay + 26000);
+
+        setTimeout(function() {
+            p6.style.display = "inline-block";
+            typeEffect(p6, speed);
+        }, delay + 28000);
+    </script>
+</body>
+
+</html>

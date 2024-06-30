@@ -1,0 +1,121 @@
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            height: 100%;
+            text-align: center;
+            font-family: 'Oxygen Mono', monospace;
+            color: #999;
+            overflow: hidden;
+        }
+
+        #table {
+            display: table;
+            width: 100%;
+            height: 100%;
+            background-color: #e5e5e5;
+            position: relative;
+        }
+
+        #navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px 50px;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        #navbar img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        #navbar button {
+            background-color: #b8b8b8;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 70px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .upload-section {
+            text-align: center;
+            margin: 20px;
+            margin-top: 14%;
+        }
+
+        .upload-button {
+            background-color: #404040;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-button:hover {
+            background-color: #515151;
+        }
+
+        .preview-images {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .preview-images img {
+            margin: 0 10px;
+            height: 100px;
+            width: auto;
+            border-radius: 5px;
+        }
+
+        #file-upload {
+            display: none;
+        }
+        p{
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="table">
+        <div id="navbar">
+            <img src="petra.webp" alt="Logo">
+        </div>
+        <div class="upload-section">
+            <h1>Upload an image to ..... </h1>
+            <label for="file-upload" class="upload-button">Upload Image</label>
+            <input type="file" id="file-upload">
+            <p>or drop a file, paste image or URL</p>
+            <div class="preview-images">
+                <img src="example1.jpg" alt="Example 1">
+                <img src="example2.jpg" alt="Example 2">
+                <img src="example3.jpg" alt="Example 3">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
