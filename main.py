@@ -20,14 +20,6 @@ for i in range(6):
     ax = plt.subplot(2, 3, i+1)
     img_dir = 'data/train_v2/train/'+train.loc[i, 'FILENAME']
     image = cv2.imread(img_dir, cv2.IMREAD_GRAYSCALE)
-    if image is None:
-        print(f"Failed to read image: {img_dir}")
-        plt.title(f"Failed to load: {train.loc[i, 'FILENAME']}", fontsize=12)
-        plt.axis('off')
-        continue
-    else:
-        print(f"Successfully read image: {img_dir}")
-        print(f"Image dtype: {image.dtype}, Image shape: {image.shape}")
     plt.imshow(image, cmap = 'gray')
     plt.title(train.loc[i, 'IDENTITY'], fontsize=12)
     plt.axis('off')
@@ -182,7 +174,6 @@ inner = Dense(num_of_characters, kernel_initializer='he_normal',name='dense2')(i
 y_pred = Activation('softmax', name='softmax')(inner)
 
 model = Model(inputs=input_data, outputs=y_pred)
-model.summary()
 
 # the ctc loss function
 def ctc_lambda_func(args):
@@ -205,6 +196,8 @@ model_final.compile(loss={'ctc': lambda y_true, y_pred: y_pred}, optimizer=Adam(
 model_final.fit(x=[train_x, train_y, train_input_len, train_label_len], y=train_output, 
                 validation_data=([valid_x, valid_y, valid_input_len, valid_label_len], valid_output),
                 epochs=60, batch_size=128)
+
+model.save('handwriting_model.h5')
 
 preds = model.predict(valid_x)
 decoded = K.get_value(K.ctc_decode(preds, input_length=np.ones(preds.shape[0])*preds.shape[1], 
@@ -233,28 +226,3 @@ for i in range(valid_size):
     
 print('Correct characters predicted : %.2f%%' %(correct_char*100/total_char))
 print('Correct words predicted      : %.2f%%' %(correct*100/valid_size))
-
-test = pd.read_csv('data/written_name_test_v2.csv')
-
-plt.figure(figsize=(15, 10))
-for i in range(6):
-    ax = plt.subplot(2, 3, i+1)
-    img_dir = 'data/test_v2/test/'+test.loc[i, 'FILENAME']
-    image = cv2.imread(img_dir, cv2.IMREAD_GRAYSCALE)
-    plt.imshow(image, cmap='gray')
-    
-    image = preprocess(image)
-    image = image/255.
-    pred = model.predict(image.reshape(1, 256, 64, 1))
-    decoded = K.get_value(K.ctc_decode(pred, input_length=np.ones(pred.shape[0])*pred.shape[1], 
-                                       greedy=True)[0][0])
-    plt.title(num_to_label(decoded[0]), fontsize=12)
-    plt.axis('off')
-    
-plt.subplots_adjust(wspace=0.2, hspace=-0.8)
-
-
-
-
-
-
