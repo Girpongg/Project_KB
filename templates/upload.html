@@ -121,13 +121,14 @@
                 <label for="file-upload" class="upload-button">Upload Image</label>
                 <input type="file" id="file-upload" name="file">
                 <p>or drop a file, paste image or URL</p>
-                <div class="preview-images">
-                    <img src="static/example1.jpg" alt="Example 1">
-                    <img src="static/example2.jpg" alt="Example 2">
-                    <img src="static/example3.jpg" alt="Example 3">
-                </div>
                 <button type="submit" class="upload-button">Submit</button>
             </form>
+            <h2>
+                {% if predict!="" %}
+                {{predict}}
+                {% endif %}
+            </h2>
+                <img src="{{file}}">
         </div>
     </div>
 </body>

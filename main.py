@@ -11,50 +11,26 @@ from keras.models import Model
 from keras.layers import Input, Conv2D, MaxPooling2D, Reshape, Bidirectional, LSTM, Dense, Lambda, Activation, BatchNormalization, Dropout
 from keras.optimizers import Adam
 
-train = pd.read_csv('data/written_name_train_v2.csv')
-valid = pd.read_csv('data/written_name_validation_v2.csv')
+train = pd.read_csv('data/written_name_train.csv')
+valid = pd.read_csv('data/written_name_test.csv')
 
-# plt.figure(figsize=(15, 10))
+# print("Number of NaNs in train set      : ", train['IDENTITY'].isnull().sum())
+# print("Number of NaNs in validation set : ", valid['IDENTITY'].isnull().sum())
 
-# for i in range(6):
-#     ax = plt.subplot(2, 3, i+1)
-#     img_dir = 'data/train_v2/train/'+train.loc[i, 'FILENAME']
-#     image = cv2.imread(img_dir, cv2.IMREAD_GRAYSCALE)
-#     plt.imshow(image, cmap = 'gray')
-#     plt.title(train.loc[i, 'IDENTITY'], fontsize=12)
-#     plt.axis('off')
+# train.dropna(axis=0, inplace=True)
+# valid.dropna(axis=0, inplace=True)
 
-# plt.subplots_adjust(wspace=0.2, hspace=-0.8)
+# unreadable = train[train['IDENTITY'] == 'UNREADABLE']
+# unreadable.reset_index(inplace = True, drop=True)
 
-print("Number of NaNs in train set      : ", train['IDENTITY'].isnull().sum())
-print("Number of NaNs in validation set : ", valid['IDENTITY'].isnull().sum())
+# train = train[train['IDENTITY'] != 'UNREADABLE']
+# valid = valid[valid['IDENTITY'] != 'UNREADABLE']
 
-train.dropna(axis=0, inplace=True)
-valid.dropna(axis=0, inplace=True)
+# train['IDENTITY'] = train['IDENTITY'].str.upper()
+# valid['IDENTITY'] = valid['IDENTITY'].str.upper()
 
-unreadable = train[train['IDENTITY'] == 'UNREADABLE']
-unreadable.reset_index(inplace = True, drop=True)
-
-# plt.figure(figsize=(15, 10))
-
-# for i in range(6):
-#     ax = plt.subplot(2, 3, i+1)
-#     img_dir = 'data/train_v2/train/'+unreadable.loc[i, 'FILENAME']
-#     image = cv2.imread(img_dir, cv2.IMREAD_GRAYSCALE)
-#     plt.imshow(image, cmap = 'gray')
-#     plt.title(unreadable.loc[i, 'IDENTITY'], fontsize=12)
-#     plt.axis('off')
-
-# plt.subplots_adjust(wspace=0.2, hspace=-0.8)
-
-train = train[train['IDENTITY'] != 'UNREADABLE']
-valid = valid[valid['IDENTITY'] != 'UNREADABLE']
-
-train['IDENTITY'] = train['IDENTITY'].str.upper()
-valid['IDENTITY'] = valid['IDENTITY'].str.upper()
-
-train.reset_index(inplace = True, drop=True) 
-valid.reset_index(inplace = True, drop=True)
+# train.reset_index(inplace = True, drop=True) 
+# valid.reset_index(inplace = True, drop=True)
 
 def preprocess(img):
     (h, w) = img.shape
