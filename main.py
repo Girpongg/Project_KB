@@ -16,15 +16,15 @@ valid = pd.read_csv('data/written_name_validation_v2.csv')
 
 # plt.figure(figsize=(15, 10))
 
-for i in range(6):
-    ax = plt.subplot(2, 3, i+1)
-    img_dir = 'data/train_v2/train/'+train.loc[i, 'FILENAME']
-    image = cv2.imread(img_dir, cv2.IMREAD_GRAYSCALE)
-    plt.imshow(image, cmap = 'gray')
-    plt.title(train.loc[i, 'IDENTITY'], fontsize=12)
-    plt.axis('off')
+# for i in range(6):
+#     ax = plt.subplot(2, 3, i+1)
+#     img_dir = 'data/train_v2/train/'+train.loc[i, 'FILENAME']
+#     image = cv2.imread(img_dir, cv2.IMREAD_GRAYSCALE)
+#     plt.imshow(image, cmap = 'gray')
+#     plt.title(train.loc[i, 'IDENTITY'], fontsize=12)
+#     plt.axis('off')
 
-plt.subplots_adjust(wspace=0.2, hspace=-0.8)
+# plt.subplots_adjust(wspace=0.2, hspace=-0.8)
 
 print("Number of NaNs in train set      : ", train['IDENTITY'].isnull().sum())
 print("Number of NaNs in validation set : ", valid['IDENTITY'].isnull().sum())
@@ -35,17 +35,17 @@ valid.dropna(axis=0, inplace=True)
 unreadable = train[train['IDENTITY'] == 'UNREADABLE']
 unreadable.reset_index(inplace = True, drop=True)
 
-plt.figure(figsize=(15, 10))
+# plt.figure(figsize=(15, 10))
 
-for i in range(6):
-    ax = plt.subplot(2, 3, i+1)
-    img_dir = 'data/train_v2/train/'+unreadable.loc[i, 'FILENAME']
-    image = cv2.imread(img_dir, cv2.IMREAD_GRAYSCALE)
-    plt.imshow(image, cmap = 'gray')
-    plt.title(unreadable.loc[i, 'IDENTITY'], fontsize=12)
-    plt.axis('off')
+# for i in range(6):
+#     ax = plt.subplot(2, 3, i+1)
+#     img_dir = 'data/train_v2/train/'+unreadable.loc[i, 'FILENAME']
+#     image = cv2.imread(img_dir, cv2.IMREAD_GRAYSCALE)
+#     plt.imshow(image, cmap = 'gray')
+#     plt.title(unreadable.loc[i, 'IDENTITY'], fontsize=12)
+#     plt.axis('off')
 
-plt.subplots_adjust(wspace=0.2, hspace=-0.8)
+# plt.subplots_adjust(wspace=0.2, hspace=-0.8)
 
 train = train[train['IDENTITY'] != 'UNREADABLE']
 valid = valid[valid['IDENTITY'] != 'UNREADABLE']
@@ -197,7 +197,7 @@ model_final.fit(x=[train_x, train_y, train_input_len, train_label_len], y=train_
                 validation_data=([valid_x, valid_y, valid_input_len, valid_label_len], valid_output),
                 epochs=60, batch_size=128)
 
-model.save('handwriting_model.h5')
+model.save('handwriting_model2.h5')
 
 preds = model.predict(valid_x)
 decoded = K.get_value(K.ctc_decode(preds, input_length=np.ones(preds.shape[0])*preds.shape[1], 

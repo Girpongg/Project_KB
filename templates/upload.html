@@ -102,6 +102,7 @@
         p {
             margin-top: 40px;
         }
+
         img {
             margin-right: 30px;
         }
@@ -111,19 +112,22 @@
 <body>
     <div id="table">
         <div id="navbar">
-            <img src="petra.webp" alt="Logo">
+            <img src="static/petra.webp" alt="Logo">
             ARTIFICIAL INTELLIGENCE
         </div>
         <div class="upload-section">
             <h1>Upload an image to ..... </h1>
-            <label for="file-upload" class="upload-button">Upload Image</label>
-            <input type="file" id="file-upload">
-            <p>or drop a file, paste image or URL</p>
-            <div class="preview-images">
-                <img src="example1.jpg" alt="Example 1">
-                <img src="example2.jpg" alt="Example 2">
-                <img src="example3.jpg" alt="Example 3">
-            </div>
+            <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+                <label for="file-upload" class="upload-button">Upload Image</label>
+                <input type="file" id="file-upload" name="file">
+                <p>or drop a file, paste image or URL</p>
+                <div class="preview-images">
+                    <img src="static/example1.jpg" alt="Example 1">
+                    <img src="static/example2.jpg" alt="Example 2">
+                    <img src="static/example3.jpg" alt="Example 3">
+                </div>
+                <button type="submit" class="upload-button">Submit</button>
+            </form>
         </div>
     </div>
 </body>
